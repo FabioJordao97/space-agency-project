@@ -2,7 +2,7 @@ import React from "react"
 import { useHistory } from "react-router-dom"
 import { HeaderLabel, Header, LabeX, Main, ReturnButton, SubscribeButton} from "../components/styles"
 
-function HomePage () {
+const HomePage = () => {
 
     const history = useHistory();
 

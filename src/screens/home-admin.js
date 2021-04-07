@@ -4,7 +4,7 @@ import { Header, LabeX, ReturnButton, AdminHome,  HeaderLabel, HomeAdminButtons,
 import { useProtectedPage } from "../hooks/useProtectedPage"
 import {goToHome, goToCreateTrips, goToTrips} from '../router/coordinator'
 
-function AdminHomePage() {
+const AdminHomePage = () => {
 
     const history = useHistory()
     useProtectedPage()

@@ -10,7 +10,7 @@ import AdminHomePage from "../screens/home-admin"
 import ErrorPage from "../screens/error"
 import UserTrip from "../screens/trips-user"
 
-function Router () {
+const Router = () => {
     return (
         <BrowserRouter>
         <Switch>

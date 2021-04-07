@@ -3,9 +3,9 @@ import axios from "axios"
 import { useHistory, useParams } from "react-router-dom"
 import { Header, LabeX, ReturnButton, HeaderLabel,  StyledPositiveSpan, StyledH2Div, StyledNegativeSpan } from "./styles"
 import { useProtectedPage } from "../hooks/useProtectedPage"
+import baseURL from "../constants/baseURL"
 
-
-function ApprovalPage() {
+const ApprovalPage = () => {
     const history = useHistory()
 
     const goBackToAdminHome = () => {
@@ -16,17 +16,17 @@ function ApprovalPage() {
 
     const token = localStorage.getItem('token')
 
+    const headers = {
+        headers: {
+        auth: token
+    }}
+
     const [trip, setTrip] = useState()
     const [newCandidates, setNewCandidates] = useState([])
 
     const getCandidates = () => {
         axios
-            .get(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/fabio-dumont/trip/${id}`, {
-
-                headers: {
-                    auth: token
-                }
-            })
+            .get(`${baseURL}/trip/${id}`, headers)
             .then((res) => {
                 setTrip(res.data.trip.name)
                 setNewCandidates(res.data.trip.candidates)
@@ -47,11 +47,7 @@ function ApprovalPage() {
         }
 
         axios
-            .put(`https://us-central1-labenu-apis.cloudfunctions.net/labeX/fabio-dumont/trips/${id}/candidates/${candidatesId}/decide`, body, {
-                headers: {
-                    auth: token
-                }
-            })
+            .put(`${baseURL}/trips/${id}/candidates/${candidatesId}/decide`, body, headers)
             .then(() => {
 
                 if(decision){
@@ -77,9 +73,9 @@ function ApprovalPage() {
         <div>
 
             <Header>
-                <LabeX onClick={goToHome}>Labe-X</LabeX>
+                <LabeX onClick={() => goToHome(history)}>Labe-X</LabeX>
                 <HeaderLabel>Desbrave o universo com a Labe-X</HeaderLabel>
-                <ReturnButton onClick={goBackToAdminHome}>Voltar para Home do Adminstrador</ReturnButton>
+                <ReturnButton onClick={() => goBackToAdminHome(history)}>Voltar para Home do Adminstrador</ReturnButton>
             </Header>
 
             <StyledH2Div>

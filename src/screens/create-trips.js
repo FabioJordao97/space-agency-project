@@ -7,7 +7,7 @@ import { useForm } from "../hooks/useForm"
 import {goToHome} from '../router/coordinator'
 import {createTrip} from '../constants/requisitions'
 
-function CreateTripsPage() {
+const CreateTripsPage = () => {
     useProtectedPage();
     const { form, onChange } = useForm({ name: "", planet: "", date: "", description: "", durationInDays: "" })
 
